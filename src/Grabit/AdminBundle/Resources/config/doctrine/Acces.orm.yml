@@ -1,0 +1,23 @@
+Grabit\AdminBundle\Entity\Acces:
+    type: entity
+    table: acces
+    repositoryClass: Grabit\AdminBundle\Entity\AccesRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        email:
+            type: string
+            length: '50'
+        password:
+            type: string
+            length: '64'
+        id_utilisateur:
+            type: integer
+        bloque:
+            type: boolean
+        connexion:
+            type: datetime
+    lifecycleCallbacks: {  }

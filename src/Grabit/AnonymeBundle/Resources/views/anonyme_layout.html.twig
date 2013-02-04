@@ -1,0 +1,53 @@
+{# AnonymBundle/views/index.html.twig #}
+<!DOCTYPE HTML>
+<html lang="fr-FR">
+<head>
+	<meta charset="UTF-8">
+        <title>{% block title %} Grab it! {% endblock %}</title>
+	<script src="{{ asset('assets/bootstrap/js/jquery-1.8.3.min.js') }}"></script>
+	<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+        {% block stylesheets %}
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-responsive.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/css/grabit.css')}}" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <a href="{{ path( 'anonyme_homepage' ) }}" class="brand"><span>grab it !</span></a>
+            <div class="nav-collapse collapse pull-right">
+              <ul class="nav">
+                <li class="active"><a href="{{ path( 'anonyme_homepage' ) }}">Accueil</a></li>
+                <li><a href="{{path( 'tour' )}}">Les avantages</a></li>
+                <li><a href="{{path( 'pricing' )}}">Les tarifs</a></li>
+                <li><a href="{{path( 'login' )}}">Se connecter</a></li>
+                <li><a href="{{path( 'inscription' )}}">Insccription</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+    </div>
+    <div class="container">
+    {% block body %}{% endblock %}
+    </div>
+    {% block javascripts %}{% endblock %}
+
+    <footer>
+	<div class="container">
+	    <div class="row-fluid">
+		<h4>Ça c'est le pied de page</h4>
+	    </div>
+	</div>
+    </footer>
+	{% block popup %} {% endblock %}
+</body>
+</html>

@@ -1,0 +1,26 @@
+admin_user:
+    resource: "@AdminBundle/Resources/config/routing/utilisateur.yml"
+    prefix:   /admin/user
+
+admin_abo:
+    resource: "@AdminBundle/Resources/config/routing/abonnement.yml"
+    prefix:   /admin/abo
+
+admin_acces:
+    resource: "@AdminBundle/Resources/config/routing/acces.yml"
+    prefix:   /admin
+
+
+admin_souscription:
+    resource: "@AdminBundle/Resources/config/routing/souscription.yml"
+    prefix:   /admin
+
+
+utilisateur:
+    pattern:  /admin
+    defaults: { _controller: "AdminBundle:Utilisateur:index" }
+
+homepage:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Utilisateur:index" }
+

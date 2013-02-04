@@ -1,0 +1,17 @@
+Grabit\AdminBundle\Entity\Souscription:
+    type: entity
+    table: souscription
+    repositoryClass: Grabit\AdminBundle\Entity\SouscriptionRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        id_utilisateur:
+            type: integer
+        id_abonnement:
+            type: integer
+        fin_validite:
+            type: date
+    lifecycleCallbacks: {  }

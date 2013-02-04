@@ -1,0 +1,62 @@
+{# views/Acces/index.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+<h1>{{ page_title }}</h1>
+
+
+<table class="records_list table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Numéro de l'utilisateur</th>
+            <th>Bloque</th>
+            <th>Connexion</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('acces_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.idUtilisateur }}</td>
+            <td>{% if entity.bloque == 1 %}
+		    <a href="{{ path('acces_unblock', { 'id': entity.idUtilisateur }) }}" class="btn btn-danger btn-small" title="Débloquer l'utilisateur"><i class="icon-white icon-minus-sign"></i></a>
+	    {% else %}
+	    <a href="{{ path('acces_block', { 'id': entity.idUtilisateur }) }}" class="btn btn-success btn-small" title="Bloquer l'utilisateur"><i class="icon-white icon-ok-sign"></i></a>
+	    {% endif %}
+	    </td>
+            <td>{% if entity.connexion %}{{ entity.connexion|date('d/m/Y') }}{% endif %}</td>
+            <td class="actions">
+		<div class="btn-group">
+		    <a href="{{ path('acces_show', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-eye-open"></i> Voir</a>
+		    <a href="{{ path('acces_edit', { 'id': entity.id }) }}" class="btn btn-small btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+		</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div>
+<div class="btn-group">
+    <a href="{{ path('acces_new') }}" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i> Ajouter un nouvel accès </a>
+</div>
+</div>
+<hr />
+	</div><!-- / .row-fluid .span12 -->
+    </div><!-- / .row-fluid -->
+{% endblock %}

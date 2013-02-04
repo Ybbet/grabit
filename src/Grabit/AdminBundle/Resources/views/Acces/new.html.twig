@@ -1,0 +1,64 @@
+{# views/Acces/new.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span2">
+	{% if etape %}
+	    <h3>{{ etape }}</h3>
+	{% endif %}
+    </div>
+<div class="span6">
+<h1>{{ page_title }}</h1>
+
+<form action="{{ path('acces_create') }}" method="post" {{ form_enctype(form) }}>
+<div class="row-fluid">
+	<div class="span6">
+	    <h4>Infos de connexion</h4>
+<div class="control-group">
+{{ form_label(form.email, 'Email', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.email, {'attr' : {'placeholder' : 'nom@domaine.com'} } ) }}
+{{ form_errors(form.email) }}
+</div>
+</div>
+
+<div class="control-group">
+<div class="controls">
+{{ form_widget(form.password) }}
+{{ form_errors(form.password) }}
+</div>
+</div>
+
+	<a href="{{ path('utilisateur') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour à l'accueil</a>
+	</div>
+	<div class="span6">
+	{{ form_rest(form) }}
+<div class="control-group">
+<div class="controls">
+<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Valider</button>
+</div>
+</div>
+	</div>
+</div>
+
+</form>
+
+	    <pre>
+	    {{ dump(form) }}
+	    </pre>
+</div>
+
+	<div class="span4">
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,106 @@
+{# views/Abonnement/show.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <h4>Abonnement</h4>
+	    <h1><small>n#</small>{{ entity.id }}</h1>
+	</div> <!-- / .row-fluid .span2 -->
+	<div class="span6">
+	    <h2>{{ entity.nom }}
+		<small>{{ page_title }}</small></h2>
+
+	    <p><strong>Espace :</strong> {{ entity.espace }} Go.</p>
+
+	    <p><strong>Prix :</strong> {{ entity.prix }} €/mois.</p>
+	    
+	    <hr />
+	    {% if souscriptions %}
+	    <h3>Les souscriptions à cet abonnement</h3>
+	    <table class="table">
+		<thead>
+		    <tr>
+			<th>Id</th>
+			<th>Numéro de l'utilisateur</th>
+			<th>Numéro de l'abonnement</th>
+			<th>Date de fin de validité</th>
+			<th>Actions</th>
+		    </tr>
+		</thead>
+		<tbody>
+		{% for souscription in souscriptions %}
+		    {% if souscription.idabonnement == entity.id %}
+		    <tr>
+			<td><a href="{{ path('souscription_show', { 'id': souscription.id }) }}">{{ souscription.id }}</a></td>
+			<td><a href="{{ path('utilisateur_show', { 'id': souscription.idutilisateur }) }}">{{ souscription.idutilisateur }}</a></td>
+			<td>{{ souscription.idabonnement }}</td>
+			<td>{% if souscription.finvalidite %}{{ souscription.finvalidite|date('d/m/Y') }}{% endif %}</td>
+			<td class="actions">
+			    <div class="btn-group">
+				<a href="{{ path('souscription_show', { 'id': souscription.id }) }}" class="btn btn-small"><i class="icon-eye-open"></i> Voir</a>
+				<a href="{{ path('souscription_edit', { 'id': souscription.id }) }}" class="btn btn-small btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+			    </div>
+			</td>
+		    </tr>
+		    {% endif %}
+		{% endfor %}
+		</tbody>
+	    </table>
+	    {% endif %}
+	</div> <!-- / .row-fluid .span8 -->
+
+	<div class="span4">
+	    <div class="btn-group">
+		<a href="{{ path('abonnement') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour</a>
+		<a href="{{ path('abonnement_edit', { 'id': entity.id }) }}" class="btn btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+		<a class="btn bt_delete btn-danger" href="{{ path('abonnement_delete', { 'id': entity.id }) }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+	    </div>
+	</div>
+</div> <!-- / .row-fluid -->
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+    $(document).ready(function(){
+       $('.bt_delete').on('click', function(e){
+           e.preventDefault();
+//           $('.modal-footer a.btn-primary').attr('href', $(this).attr('href'));
+           $('#pop_delete').modal('show');
+       });
+    });
+
+</script>
+{% endblock %}
+
+{% block popup %}
+<div id="pop_delete" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Supprimer l'abonnement {{ entity.nom }}</h3>
+  </div>
+  <div class="modal-body">
+    <p>Voulez-vous vraiment supprimer définitivement cet abonnement ?</p>
+  </div>
+  <div class="modal-footer">
+    <form method="post" action="{{ path('abonnement_delete', {'id': entity.id}) }}" {{ form_enctype(delete_form) }} >
+        {{ form_widget(delete_form) }}
+      <div class="btn-group">
+	<a href="{{ path('abonnement_show', { 'id': entity.id }) }}" class="btn"> Annuler</a>
+	<button type="submit" class="btn btn-danger">Confirmer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

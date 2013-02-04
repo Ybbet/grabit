@@ -1,0 +1,55 @@
+{# views/Souscription/index.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+<h1>{{ page_title }}</h1>
+
+<table class="records_list table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Numéro de l'utilisateur</th>
+            <th>Numéro de l'abonnement</th>
+            <th>Date de fin de validité</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('souscription_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.idutilisateur }}</td>
+            <td>{{ entity.idabonnement }}</td>
+            <td>{% if entity.finvalidite %}{{ entity.finvalidite|date('d/m/Y') }}{% endif %}</td>
+            <td class="actions">
+		<div class="btn-group">
+		    <a href="{{ path('souscription_show', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-eye-open"></i> Voir</a>
+		    <a href="{{ path('souscription_edit', { 'id': entity.id }) }}" class="btn btn-small btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+		</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div>
+<div class="btn-group">
+    <a href="{{ path('utilisateur_new') }}" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i> Ajouter une nouvelle souscription </a>
+</div>
+</div>
+<hr />
+
+	</div><!-- / .row-fluid .span12 -->
+    </div><!-- / .row-fluid -->
+{% endblock %}

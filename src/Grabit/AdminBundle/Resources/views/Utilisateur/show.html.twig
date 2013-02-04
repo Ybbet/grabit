@@ -1,0 +1,113 @@
+{# views/Utilisateur/show.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <h4>Utilisateur</h4>
+	    <h1><small>n#</small>{{ entity.id }}</h1>
+	</div> <!-- / .row-fluid .span2 -->
+	<div class="span6">
+	<h2>{{ entity.prenom }}, {{ entity.nom }}
+	<small>{{ page_title }}</small></h2>
+		<hr/>
+		<a href="{{ path('utilisateur_edit', { 'id': entity.id }) }}" class="btn pull-right" title="Éditer les infos"><i class="icon-pencil"></i></a>
+<table class="record_properties table">
+    <tbody>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ entity.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Code postal</th>
+            <td>{{ entity.codepostal }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ entity.ville }}</td>
+        </tr>
+        <tr>
+            <th>Pays</th>
+            <td>{{ entity.pays }}</td>
+        </tr>
+    </tbody>
+</table>
+{# On vérifie si acces retourne un résultat; S'il est NULL, on n'affiche rien #}
+{% if acces is null %}
+		{% else %}
+		<hr/>
+		<a href="{{ path('acces_edit', {'id' : acces.id }) }}" class="btn pull-right bt_code_edit" title="Éditer les codes d'accès"><i class="icon-pencil"></i></a>
+		<h3>Code d'accès</h3>
+		<p><strong>Login :</strong> {{ acces.email }} </p>
+{% endif %}
+
+{# On vérifie si abonnement retourne un résultat. S'il est NULL, on n'affiche rien sur cette zone #}
+{% if abonnements is null %}
+		{% else %}
+		<hr/>
+		<a href="{{ path('souscription_edit', {'id' : souscription.id }) }}" class="btn pull-right bt_code_edit" title="Éditer la souscription"><i class="icon-pencil"></i></a>
+		<h3>L'abonnement de l'utilisateur</h3>
+		{% for abonnement in abonnements %}
+		    {% if abonnement.id == souscription.idAbonnement %}
+		    <p><strong>Nom :</strong> {{ abonnement.nom }} </p>
+		    <p><strong>Tarif :</strong> {{ abonnement.prix}} €/mois </p>
+		    {% endif %}
+		{% endfor %}
+		<p><strong>Date de fin de validité : </strong> {{ souscription.finValidite|date('d/m/Y', "Europe/Paris") }}</p>
+{% endif %}
+	</div> <!-- / .row-fluid .span6 -->
+
+	<div class="span4">
+	    <div class="btn-group">
+		<a href="{{ path('utilisateur') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour</a>
+		<a class="btn bt_delete btn-danger" href="{{ path('utilisateur_delete', { 'id': entity.id }) }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+	    </div>
+	</div>
+</div> <!-- / .row-fluid -->
+{% endblock %}
+
+
+{% block javascripts %}
+<script>
+
+    $(document).ready(function(){
+       $('.bt_delete').on('click', function(e){
+           e.preventDefault();
+//           $('.modal-footer a.btn-primary').attr('href', $(this).attr('href'));
+           $('#pop_delete').modal('show');
+       });
+    });
+
+</script>
+{% endblock %}
+
+{% block popup %}
+<div id="pop_delete" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Supprimer l'utilisateur {{ entity.prenom }} {{ entity.nom }}</h3>
+  </div>
+  <div class="modal-body">
+    <p>Voulez-vous vraiment supprimer définitivement cet utilisateur ?</p>
+  </div>
+  <div class="modal-footer">
+    <form method="post" action="{{ path('utilisateur_delete', {'id': entity.id}) }}" {{ form_enctype(delete_form) }} id="utilisateur_delete_form" >
+        {{ form_widget(delete_form) }}
+      <div class="btn-group">
+	<a href="{{ path('utilisateur_show', { 'id': entity.id }) }}" class="btn"> Annuler</a>
+	<button type="submit" class="btn btn-danger">Confirmer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

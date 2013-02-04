@@ -1,0 +1,71 @@
+{# views/Acces/edit.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <a href="{{ path('acces') }}" class="btn">
+		<i class="icon-circle-arrow-left"></i>
+            Back to the list
+        </a>
+	</div>
+	<div class="span6">
+<h1>Code d'accès
+<small>{{ page_title }}</small></h1>
+<form action="{{ path('acces_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} id="acces_edit_form">
+<div class="control-group">
+{{ form_label(edit_form.email, 'Email', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.email, {'attr' : {'placeholder' : 'Email'} } ) }}
+{{ form_errors(edit_form.email) }}
+</div>
+</div>
+<div class="control-group">
+{{ form_label(edit_form.password, 'Password', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.password, {'attr' : {'placeholder' : 'Password'} } ) }}
+{{ form_errors(edit_form.password) }}
+</div>
+</div>
+	{{ form_rest(edit_form) }}
+    <p>
+        <button type="submit">Enregistrer</button>
+    </p>
+</form>
+
+	</div>
+	<div class="span2">
+	</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('assets/jqueryvalidate/jquery.validate.min.js') }}"></script>
+<script type="text/javascript">
+$().ready(function() {
+	// validate signup form on keyup and submit
+	$("#acces_edit_form").validate({
+		rules: {
+			grabit_adminbundle_accestype_password_first: {
+				required: true,
+				minlength: 5
+			},
+			grabit_adminbundle_accestype_password_second: {
+				required: true,
+				minlength: 5,
+				equalTo: "#grabit_adminbundle_accestype_password_first"
+			}
+			}
+			});
+		    });
+</script>
+{% endblock %}

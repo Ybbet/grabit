@@ -1,0 +1,55 @@
+{# views/Abonnement/new.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+<h1>{{ page_title }}</h1>
+
+<form action="{{ path('abonnement_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+<div class="control-group">
+{{ form_label(form.nom, 'Nom', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.nom, {'attr' : {'placeholder' : 'Nom de l\'abonnement'} } ) }}
+{{ form_errors(form.nom) }}
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(form.espace, 'Espace alloué', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.espace, {'attr' : {'placeholder' : 'Taille en Go'} } ) }}
+{{ form_errors(form.espace) }}
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(form.prix, 'Prix', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.prix, {'attr' : {'placeholder' : '€/mois'} } ) }}
+{{ form_errors(form.prix) }}
+</div>
+</div>
+
+    {{ form_rest(form) }}
+
+<div class="control-group">
+<div class="controls">
+<a href="{{ path('abonnement') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour à l'accueil</a>
+<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Valider</button>
+</div>
+</div>
+</form>
+
+	</div>
+</div> <!-- / .row-fluid -->
+{% endblock %}

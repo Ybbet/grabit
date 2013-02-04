@@ -1,0 +1,31 @@
+abonnement:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Abonnement:index" }
+
+abonnement_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Abonnement:show" }
+
+abonnement_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Abonnement:new" }
+
+abonnement_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Abonnement:create" }
+    requirements: { _method: post }
+
+abonnement_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Abonnement:edit" }
+
+abonnement_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Abonnement:update" }
+    requirements: { _method: post }
+
+abonnement_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Abonnement:delete" }
+    requirements: { _method: post }
+

@@ -1,0 +1,7 @@
+parameters:
+#    utilisateur.example.class: Grabit\UtilisateurBundle\Example
+
+services:
+#    utilisateur.example:
+#        class: %utilisateur.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,27 @@
+Grabit\AdminBundle\Entity\Utilisateur:
+    type: entity
+    table: utilisateur
+    repositoryClass: Grabit\AdminBundle\Entity\UtilisateurRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nom:
+            type: string
+            length: '50'
+        prenom:
+            type: string
+            length: '50'
+        adresse:
+            type: text
+        code_postal:
+            type: integer
+        ville:
+            type: string
+            length: '50'
+        pays:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }

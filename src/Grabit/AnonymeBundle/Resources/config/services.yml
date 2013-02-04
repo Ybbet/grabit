@@ -1,0 +1,7 @@
+parameters:
+#    anonyme.example.class: Grabit\AnonymeBundle\Example
+
+services:
+#    anonyme.example:
+#        class: %anonyme.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

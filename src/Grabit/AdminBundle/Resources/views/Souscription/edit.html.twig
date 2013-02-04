@@ -1,0 +1,84 @@
+{# views/Souscription/edit.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <h4>Souscription</h4>
+	    <h1><small>n#</small>{{ entity.id }}</h1>
+	</div>
+	<div class="span6">
+	    <h1>{{ utilisateur.prenom }}, {{ utilisateur.nom }}
+	    <small>{{ page_title }}</small></h1>
+	    {% if abonnements %}
+		<hr />
+		<div class="row-fluid">
+		{% for abonnement in abonnements %}
+		    <section class="span4">
+			<div class="abonnement">
+			    {% if abonnement.id == id %}
+				<div class="encours pull-right">En cours</div>
+			    {% endif %}
+			<h1>#{{ abonnement.id }} <br />
+			    <small>{{ abonnement.nom }}</small></h1>
+			<span class="tarif">
+			    {{ abonnement.prix }}
+			    <span class="unite">€</span>
+			    <span class="periode"> /mois</span>
+			</span>
+			</div>
+		    </section>
+		{% endfor %}
+		</div>
+		<hr />
+	    {% endif %}
+		
+
+		<form action="{{ path('souscription_update', { 'id': entity.id }) }}" method="get" {{ form_enctype(edit_form) }} class="form-horizontal">
+		    
+<div class="control-group">
+{{ form_label(edit_form.id_abonnement, 'Entrer le numéro de l\'abonnement désiré :', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.id_abonnement, {'label_attr' : {'class' : 'radio'}} ) }}
+{{ form_errors(edit_form.id_abonnement) }}
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(edit_form.fin_validite, 'Date de fin de validité :', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.fin_validite) }}
+{{ form_errors(edit_form.fin_validite) }}
+</div>
+</div>
+
+		    
+    {{ form_rest(edit_form) }}
+<div class="control-group">
+<div class="controls">
+<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Enregistrer</button>
+</div>
+</div>
+</form>
+
+	    </div><!-- / .row-fluid .span6 -->
+	    
+	    <!-- .span4 -->
+	    <div class="span4">
+	    <div class="btn-group">
+		<a href="{{ path('utilisateur_show', {'id' : entity.idUtilisateur }) }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour</a>
+	    </div>
+	    </div>
+	    <!-- / .row-fluid .span4 -->
+	    
+    </div><!-- / .row-fluid -->
+{% endblock %}

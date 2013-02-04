@@ -1,0 +1,30 @@
+utilisateur:
+    pattern:  /
+    defaults: { _controller: "AdminBundle:Utilisateur:index" }
+
+utilisateur_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "AdminBundle:Utilisateur:show" }
+
+utilisateur_new:
+    pattern:  /new
+    defaults: { _controller: "AdminBundle:Utilisateur:new" }
+
+utilisateur_create:
+    pattern:  /create
+    defaults: { _controller: "AdminBundle:Utilisateur:create" }
+    requirements: { _method: post }
+
+utilisateur_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "AdminBundle:Utilisateur:edit" }
+
+utilisateur_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "AdminBundle:Utilisateur:update" }
+    requirements: { _method: post }
+
+utilisateur_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "AdminBundle:Utilisateur:delete" }
+    requirements: { _method: post }

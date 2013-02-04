@@ -1,0 +1,18 @@
+Grabit\AdminBundle\Entity\Abonnement:
+    type: entity
+    table: abonnement
+    repositoryClass: Grabit\AdminBundle\Entity\AbonnementRepository
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        nom:
+            type: string
+            length: '50'
+        espace:
+            type: integer
+        prix:
+            type: integer
+    lifecycleCallbacks: {  }

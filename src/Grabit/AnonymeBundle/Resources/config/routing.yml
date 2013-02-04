@@ -1,0 +1,4 @@
+anonyme_homepage:
+    pattern:  /
+    defaults: { _controller: AnonymeBundle:Default:index }
+

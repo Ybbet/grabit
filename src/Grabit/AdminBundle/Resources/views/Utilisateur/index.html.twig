@@ -1,0 +1,75 @@
+{# views/Utilisateur/index.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span12">
+<h1>{{ page_title }}</h1>
+
+<table class="records_list table">
+    <thead>
+        <tr>
+            <th>Id</th>
+	    <th>Bloqué</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Adresse</th>
+            <th>Code postal</th>
+            <th>Ville</th>
+            <th>Pays</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('utilisateur_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+	    <td>{% for bloque in acces %}
+		    {% if bloque.idUtilisateur == entity.id %}
+		    {% if bloque.bloque == 1 %}
+		    <a href="{{ path('utilisateur_unblock', { 'id': entity.id }) }}" class="btn btn-danger btn-small" title="Débloquer l'utilisateur"><i class="icon-white icon-minus-sign"></i></a>
+	    {% else %}
+	    <a href="{{ path('utilisateur_block', { 'id': entity.id }) }}" class="btn btn-success btn-small" title="Bloquer l'utilisateur"><i class="icon-white icon-ok-sign"></i></a>
+	    {% endif %}
+		    {% endif %}
+		{% endfor %}
+	    </td>
+            <td>{{ entity.nom }}</td>
+            <td>{{ entity.prenom }}</td>
+            <td>{{ entity.adresse }}</td>
+            <td>{{ entity.codepostal }}</td>
+            <td>{{ entity.ville }}</td>
+            <td>{{ entity.pays }}</td>
+            <td class="actions">
+		<div class="btn-group">
+		    <a href="{{ path('utilisateur_show', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-eye-open"></i> Voir</a>
+		    <a href="{{ path('utilisateur_edit', { 'id': entity.id }) }}" class="btn btn-small btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+		</div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div>
+<div class="btn-group">
+    <a href="{{ path('utilisateur_new') }}" class="btn btn-large btn-success"><i class="icon-plus icon-white"></i> Ajouter un nouvel utilisateur </a>
+</div>
+</div>
+<hr />
+
+<pre>
+{{ dump(acces) }}
+</pre>
+	
+	</div> <!-- / .row-fluid .span12  -->
+</div>
+{% endblock %}

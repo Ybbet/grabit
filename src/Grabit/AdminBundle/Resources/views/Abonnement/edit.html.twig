@@ -1,0 +1,102 @@
+{# views/Abonnement/edit.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <h4>Abonnement</h4>
+	    <h1><small>n#</small>{{ entity.id }}</h1>
+	</div> <!-- / .row-fluid .span2 -->
+
+	<div class="span6">
+<h2>{{ entity.nom }}
+    <small>{{ page_title }}</small></h2>
+
+
+		<form action="{{ path('abonnement_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-horizontal">
+ <div class="control-group">
+{{ form_label(edit_form.nom, 'Nom', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.nom, {'attr' : {'placeholder' : 'Nom de l\'abonnement'} } ) }}
+{{ form_errors(edit_form.nom) }}
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(edit_form.espace, 'Espace alloué', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.espace, {'attr' : {'placeholder' : 'Taille en Go'} } ) }}
+{{ form_errors(edit_form.espace) }}
+</div>
+</div>
+
+<div class="control-group">
+{{ form_label(edit_form.prix, 'Prix', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(edit_form.prix, {'attr' : {'placeholder' : '€/mois'} } ) }}
+{{ form_errors(edit_form.prix) }}
+</div>
+</div>
+
+    {{ form_rest(edit_form) }}
+
+<div class="control-group">
+<div class="controls">
+<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Valider</button>
+</div>
+</div>
+</form>
+	</div>
+
+	<div class="span4">
+	    <div class="btn-group">
+		<a href="{{ path('abonnement') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour</a>
+		<a class="btn bt_delete btn-danger" href="#"><i class="icon-remove icon-white"></i> Supprimer</a>
+	    </div>
+	</div>
+</div> <!-- / .row-fluid -->
+{% endblock %}
+{% block javascripts %}
+<script>
+
+    $(document).ready(function(){
+       $('.bt_delete').on('click', function(e){
+           e.preventDefault();
+//           $('.modal-footer a.btn-primary').attr('href', $(this).attr('href'));
+           $('#pop_delete').modal('show');
+       });
+    });
+
+</script>
+{% endblock %}
+
+{% block popup %}
+<div id="pop_delete" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Supprimer l'abonnement {{ entity.nom }}</h3>
+  </div>
+  <div class="modal-body">
+    <p>Voulez-vous vraiment supprimer définitivement cet abonnement ?</p>
+  </div>
+  <div class="modal-footer">
+    <form method="post" action="{{ path('abonnement_delete', {'id': entity.id}) }}" {{ form_enctype(delete_form) }} >
+        {{ form_widget(delete_form) }}
+      <div class="btn-group">
+	<a href="{{ path('abonnement_show', { 'id': entity.id }) }}" class="btn"> Annuler</a>
+	<button type="submit" class="btn btn-danger">Confirmer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

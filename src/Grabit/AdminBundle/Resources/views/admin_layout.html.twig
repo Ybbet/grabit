@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+        <title>{% block title %}Administation {% endblock %}</title>
+	<script src="{{ asset('assets/bootstrap/js/jquery-1.8.3.min.js') }}"></script>
+	<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+        {% block stylesheets %}
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap-responsive.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('assets/css/grabit.css')}}" />
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+    <div class="navbar-wrapper">
+      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+      <div class="container">
+
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <a href="#" class="brand"><span>grab it !</span></a>
+            <div class="nav-collapse collapse pull-right">
+              <ul class="nav">
+                <li class="active"><a href="{{ path( 'utilisateur' ) }}">Accueil</a></li>
+                <li><a href="{{path( 'utilisateur' )}}">Inscrits</a></li>
+                <li><a href="{{path( 'abonnement' )}}">Abonnements</a></li>
+                <li><a href="{{path( 'acces' )}}">Accès</a></li>
+                <li><a href="{{path( 'souscription' )}}">Souscriptions</a></li>
+                <li><a href="#blackliste">Blackliste</a></li>
+                <li><a href="#statistiques">Statistiques</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar-inner -->
+        </div><!-- /.navbar -->
+
+      </div> <!-- /.container -->
+    </div>
+    <div class="container">
+    {% block body %}{% endblock %}
+    </div>
+    {% block javascripts %}{% endblock %}
+
+    <footer>
+	<div class="container">
+	    <div class="row-fluid">
+		<h4>Ça c'est le pied de page</h4>
+	    </div>
+	</div>
+    </footer>
+	{% block popup %} {% endblock %}
+</body>
+</html>

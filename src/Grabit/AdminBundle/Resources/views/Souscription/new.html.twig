@@ -1,0 +1,48 @@
+{# views/Souscription/new.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span2">
+<div class="control-group">
+<div class="controls">
+<a href="{{ path('souscription') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour à la liste</a>
+</div>
+</div>
+    </div>
+<div class="span6">
+<h1>{{ page_title }}</h1>
+
+
+<form action="{{ path('souscription_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+<div class="control-group">
+{{ form_label(form.idAbonnement, 'Abonnement', {'label_attr' : {'class':'control-label'} }) }}
+<div class="controls">
+{{ form_widget(form.idAbonnement ) }}
+{{ form_errors(form.idAbonnement) }}
+</div>
+</div>
+
+    {{ form_widget(form) }}
+<div class="control-group">
+<div class="controls">
+<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Valider</button>
+</div>
+</div>
+</form>
+</div> <!-- / .row-fluid .span8 -->
+<!-- .span4 -->
+<div class="span4">
+</div>
+<!-- /.span4 -->
+    </div><!-- / .row-fluid -->
+{% endblock %}

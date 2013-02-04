@@ -1,0 +1,95 @@
+{# views/Acces/show.html.twig #}
+{% extends 'AdminBundle::admin_layout.html.twig' %}
+
+{% block title %}
+{# parent() : étendre le bloc parent #}
+{{ parent() }} - {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="row-fluid">
+	<div class="span2">
+	    <h4>Accès</h4>
+	    <h1><small>n#</small>{{ entity.id }}</h1>
+	</div> <!-- / .row-fluid .span2 -->
+	<div class="span6">
+<h1>{{ page_title }}</h1>
+<table class="record_properties table">
+    <tbody>
+        <tr>
+            <th>Email</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ entity.password }}</td>
+        </tr>
+        <tr>
+            <th>Id_utilisateur</th>
+            <td>{{ entity.idutilisateur }}</td>
+        </tr>
+        <tr>
+            <th>Bloque</th>
+            <td>{{ entity.bloque }}</td>
+        </tr>
+        <tr>
+            <th>Connexion</th>
+            <td>{{ entity.connexion|date('d/m/Y') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+	</div><!-- / .row-fluid .span6 -->
+	
+	<div class="span4">
+	    <div class="btn-group">
+		<a href="{{ path('acces') }}" class="btn"><i class="icon-circle-arrow-left"></i> Retour</a>
+		<a href="{{ path('acces_edit', {'id': entity.id}) }}" class="btn btn-success"><i class="icon-pencil icon-white"></i> Éditer</a>
+		<a class="btn bt_delete btn-danger" href="{{ path('acces_delete', { 'id': entity.id }) }}"><i class="icon-remove icon-white"></i> Supprimer</a>
+	    </div>
+
+	</div>
+    </div><!-- / .row-fluid -->
+
+{% endblock %}
+    
+{% block javascripts %}
+<script>
+
+    $(document).ready(function(){
+       $('.bt_delete').on('click', function(e){
+           e.preventDefault();
+           $('.modal-footer a.btn-danger').attr('href', $(this).attr('href'));
+           $('#pop_delete').modal('show');
+       });
+    });
+
+</script>
+{% endblock %}
+
+{% block popup %}
+<div id="pop_delete" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Supprimer un accès</h3>
+  </div>
+  <div class="modal-body">
+    <p>Voulez-vous vraiment supprimer définitivement cet accès ?</p>
+  </div>
+  <div class="modal-footer">
+    <form method="post" action="{{ path('acces_delete', {'id': entity.id}) }}" {{ form_enctype(delete_form) }} >
+        {{ form_widget(delete_form) }}
+      <div class="btn-group">
+	<a href="{{ path('acces_show', { 'id': entity.id }) }}" class="btn"> Annuler</a>
+	<button type="submit" class="btn btn-danger">Confirmer</button>
+      </div>
+    </form>
+<!--    <a href="#" class="btn btn-danger"><i class="icon-remove icon-white"></i> Confirmer</a> -->
+  </div>
+</div>
+
+{% endblock %}

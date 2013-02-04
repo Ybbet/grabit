@@ -1,0 +1,32 @@
+souscription:
+    pattern:  /souscription
+    defaults: { _controller: "AdminBundle:Souscription:index" }
+
+souscription_show:
+    pattern:  /souscription/{id}/show
+    defaults: { _controller: "AdminBundle:Souscription:show" }
+
+souscription_new:
+    pattern:  /souscription/new
+    defaults: { _controller: "AdminBundle:Souscription:new" }
+
+souscription_create:
+    pattern:  /souscription/create
+    defaults: { _controller: "AdminBundle:Souscription:create" }
+    requirements: { _method: post }
+
+souscription_edit:
+    pattern:  /souscription/{id}/edit
+    defaults: { _controller: "AdminBundle:Souscription:edit" }
+
+souscription_update:
+    pattern:  /souscription/{id}/update
+    defaults: { _controller: "AdminBundle:Souscription:update" }
+    requirements: { _method: get }
+
+souscription_delete:
+    pattern:  /souscription/{id}/delete
+    defaults: { _controller: "AdminBundle:Souscription:delete" }
+    requirements: { _method: get }
+
+

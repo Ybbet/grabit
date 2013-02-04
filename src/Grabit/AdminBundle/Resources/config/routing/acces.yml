@@ -1,0 +1,39 @@
+acces:
+    pattern:  /acces
+    defaults: { _controller: "AdminBundle:Acces:index" }
+
+acces_show:
+    pattern:  /acces/{id}/show
+    defaults: { _controller: "AdminBundle:Acces:show" }
+
+acces_new:
+    pattern:  /acces/new
+    defaults: { _controller: "AdminBundle:Acces:new" }
+
+acces_create:
+    pattern:  /acces/create
+    defaults: { _controller: "AdminBundle:Acces:create" }
+    requirements: { _method: post }
+
+acces_edit:
+    pattern:  /acces/{id}/edit
+    defaults: { _controller: "AdminBundle:Acces:edit" }
+
+acces_update:
+    pattern:  /acces/{id}/update
+    defaults: { _controller: "AdminBundle:Acces:update" }
+    requirements: { _method: post }
+
+acces_delete:
+    pattern:  /acces/{id}/delete
+    defaults: { _controller: "AdminBundle:Acces:delete" }
+    requirements: { _method: post }
+
+acces_block:
+    pattern:  /user/{id}/block
+    defaults: { _controller: "AdminBundle:Acces:block" }
+
+acces_unblock:
+    pattern:  /user/{id}/unblock
+    defaults: { _controller: "AdminBundle:Acces:unblock" }
+
